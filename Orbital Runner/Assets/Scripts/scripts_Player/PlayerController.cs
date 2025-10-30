@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 /*
  * Created By: Abraar Sadek
  * Created On: 10-25-2025
  * Purpose: This script will handle player movement and interactions within the game world.
  * 
- * Last Modified By: Abraar Sadek
- * Last Modified On: 10-25-2025
- * Last Modification Made: Initial creation and setup of player movement functionality.
+ * Last Modified By: Aiden Wong
+ * Last Modified On: 10-30-2025
+ * Last Modification Made: Collision detection and score implementation.
  */
 
 //PlayerConroller Class - Manages player movement and interactions
@@ -19,17 +20,24 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour {
 
     private Rigidbody playerRB; //Reference to the player's Rigidbody2D component
+    private int count;
 
     private float playerMovementX; //Store horizontal movement input
     private float playerMovementY; //Store vertical movement input
 
     [Header("Player Settings")]
     public float playerSpeed = 5.0f; //Player movement speed
+    public TextMeshProUGUI countText;
+
+    public GameObject winTextObject;
 
     //Start Method - Called before the first frame update
     void Start() {
 
         playerRB = GetComponent<Rigidbody>();
+        count = 0;
+        SetCountText();
+        winTextObject.SetActive(false);
 
     } //End of Start Method
 
@@ -42,6 +50,16 @@ public class PlayerController : MonoBehaviour {
 
     } //End of FixedUpdate Method
 
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("PickUp"))
+        {
+            other.gameObject.SetActive(false);
+            count += 1;
+            SetCountText();
+        }
+    }//end onTriggerEnter
+
     //OnMove Method - 
     void OnMove (InputValue movementValue) {
 
@@ -51,5 +69,14 @@ public class PlayerController : MonoBehaviour {
         playerMovementY = movementVector.y; //Update vertical movement input
 
     } //End of OnMove Method
+
+    void SetCountText()
+    {
+        countText.text = "Count: " + count.ToString();
+        if (count >= 10)
+        {
+            winTextObject.SetActive(true);
+        }
+    }//end setCountText
 
 } //End of PlayerController Class
