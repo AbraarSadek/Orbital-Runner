@@ -17,7 +17,8 @@ using TMPro;
 
 //PlayerConroller Class - Manages player movement and interactions
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
 
     private Rigidbody playerRB; //Reference to the player's Rigidbody2D component
     private int count;
@@ -32,7 +33,8 @@ public class PlayerController : MonoBehaviour {
     public GameObject winTextObject;
 
     //Start Method - Called before the first frame update
-    void Start() {
+    void Start()
+    {
 
         playerRB = GetComponent<Rigidbody>();
         count = 0;
@@ -42,7 +44,8 @@ public class PlayerController : MonoBehaviour {
     } //End of Start Method
 
     //FixedUpdate Method - Called at fixed intervals for physics updates
-    private void FixedUpdate() {
+    private void FixedUpdate()
+    {
 
         Vector3 playerMovement = new Vector3(playerMovementX, 0.0f, playerMovementY);
 
@@ -61,7 +64,8 @@ public class PlayerController : MonoBehaviour {
     }//end onTriggerEnter
 
     //OnMove Method - 
-    void OnMove (InputValue movementValue) {
+    void OnMove(InputValue movementValue)
+    {
 
         Vector2 movementVector = movementValue.Get<Vector2>(); //Get and store the movement vector from input
 
@@ -76,7 +80,20 @@ public class PlayerController : MonoBehaviour {
         if (count >= 10)
         {
             winTextObject.SetActive(true);
+            Destroy(GameObject.FindGameObjectWithTag("Enemy"));
         }
     }//end setCountText
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            // Destroy the current object
+            Destroy(gameObject);
+            // Update the winText to display "You Lose!"
+            winTextObject.gameObject.SetActive(true);
+            winTextObject.GetComponent<TextMeshProUGUI>().text = "You Lose!";
+        }
+    }
 
 } //End of PlayerController Class
