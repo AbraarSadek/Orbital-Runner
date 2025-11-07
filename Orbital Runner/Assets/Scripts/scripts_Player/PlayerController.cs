@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 
+using UnityEngine.SceneManagement;
+
 /*
  * Created By: Abraar Sadek
  * Created On: 10-25-2025
@@ -81,6 +83,7 @@ public class PlayerController : MonoBehaviour
         {
             winTextObject.SetActive(true);
             Destroy(GameObject.FindGameObjectWithTag("Enemy"));
+            SceneManager.LoadSceneAsync(3);
         }
     }//end setCountText
 
@@ -93,6 +96,7 @@ public class PlayerController : MonoBehaviour
             // Update the winText to display "You Lose!"
             winTextObject.gameObject.SetActive(true);
             winTextObject.GetComponent<TextMeshProUGUI>().text = "You Lose!";
+            SceneManager.LoadSceneAsync(3);
         }
     }
 
