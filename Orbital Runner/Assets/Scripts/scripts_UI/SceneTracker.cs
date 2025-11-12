@@ -19,6 +19,6 @@ public class SceneTracker
     public static int PreviousSceneIndex; //Static int variable that will hold the index of the previously loaded scene
     public static int CurrentLevel;
     public static bool WonLastLevel;
-    public static int CurrentScore;
+    public static int CurrentScore = 0;
 
 } //End of SceneTracker Class

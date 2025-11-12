@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
         countText.text = "Count: " + count.ToString();
         if (count >= 10)
         {
-            SceneTracker.CurrentScore = count;
+            SceneTracker.CurrentScore += count;
             winTextObject.SetActive(true);
             Destroy(GameObject.FindGameObjectWithTag("Enemy"));
             SceneTracker.WonLastLevel = true;
