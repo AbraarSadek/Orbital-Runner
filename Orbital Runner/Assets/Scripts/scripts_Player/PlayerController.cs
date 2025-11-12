@@ -81,9 +81,11 @@ public class PlayerController : MonoBehaviour
         countText.text = "Count: " + count.ToString();
         if (count >= 10)
         {
+            SceneTracker.CurrentScore = count;
             winTextObject.SetActive(true);
             Destroy(GameObject.FindGameObjectWithTag("Enemy"));
-            SceneManager.LoadSceneAsync(3);
+            SceneTracker.WonLastLevel = true;
+            SceneManager.LoadSceneAsync(5); // Go to Game Over Scene.
         }
     }//end setCountText
 
@@ -94,9 +96,10 @@ public class PlayerController : MonoBehaviour
             // Destroy the current object
             Destroy(gameObject);
             // Update the winText to display "You Lose!"
-            winTextObject.gameObject.SetActive(true);
+            winTextObject.SetActive(true);
             winTextObject.GetComponent<TextMeshProUGUI>().text = "You Lose!";
-            SceneManager.LoadSceneAsync(3);
+            SceneTracker.WonLastLevel = false;
+            SceneManager.LoadSceneAsync(5); // Go to Game Over Scene.
         }
     }
 

@@ -13,8 +13,12 @@ using UnityEngine;
  */
 
 //SceneTracker Class - Used to track the current scene
-public class SceneTracker : MonoBehaviour {
+public class SceneTracker
+{
 
     public static int PreviousSceneIndex; //Static int variable that will hold the index of the previously loaded scene
+    public static int CurrentLevel;
+    public static bool WonLastLevel;
+    public static int CurrentScore;
 
 } //End of SceneTracker Class
