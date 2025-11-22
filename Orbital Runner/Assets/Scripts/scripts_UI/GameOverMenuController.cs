@@ -86,8 +86,8 @@ public class GameOverMenuController : MonoBehaviour {
     //PlayAgainButton Method - Loads the the previous level scene when the "NEXT LEVEL" button is pressed
     public void PlayAgainButton() { SceneManager.LoadSceneAsync(SceneTracker.CurrentLevel); }
 
-    //SettingsButton Method - Loads the settings menu scene when the "SETTINGS" button is pressed
-    public void SettingsButton() {
+    //OptionsButton Method - Loads the settings menu scene when the "OPTIONS" button is pressed
+    public void OptionsButton() {
 
         // Store the current scene index before loading the settings scene
         SceneTracker.PreviousSceneIndex = SceneManager.GetActiveScene().buildIndex;

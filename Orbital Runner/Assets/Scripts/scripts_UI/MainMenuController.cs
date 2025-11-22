@@ -19,13 +19,13 @@ public class MainMenuController : MonoBehaviour {
     //PlayGameButton Method - Loads the level scene when the "PLAY GAME" button is pressed
     public void PlayGameButton() { SceneManager.LoadSceneAsync(2); }
 
-    //SettingsButton Method - Loads the settings scene when the "SETTINGS" button is pressed
-    public void SettingsButton() {
+    //OptionsButton Method - Loads the settings scene when the "Options" button is pressed
+    public void OptionsButton() {
 
-        SceneTracker.PreviousSceneIndex = SceneManager.GetActiveScene().buildIndex; //Store the current scene index before loading the settings scene
+        SceneTracker.PreviousSceneIndex = SceneManager.GetActiveScene().buildIndex; //Store the current scene index before loading the options scene
         SceneManager.LoadSceneAsync(1);
 
-    } //End of SettingsButton Method
+    } //End of OptionsButton Method
 
     //QuitGameButton Method - Quits the game when the "QUIT GAME" button is pressed
     public void QuitGameButton()
