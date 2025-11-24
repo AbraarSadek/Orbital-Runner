@@ -34,6 +34,11 @@ public class PlayerController : MonoBehaviour
 
     public GameObject winTextObject;
 
+    [Header("Dependencies (Optional)")]
+    public SFXAgent rollingBallSFX;
+    public SFXAgent pickupSFX;
+    private bool sfxIsPlaying = false;
+
     //Start Method - Called before the first frame update
     void Start()
     {
@@ -52,6 +57,20 @@ public class PlayerController : MonoBehaviour
         Vector3 playerMovement = new Vector3(playerMovementX, 0.0f, playerMovementY);
 
         playerRB.AddForce(playerMovement * playerSpeed);
+        if (rollingBallSFX)
+        {
+            if (playerRB.linearVelocity.magnitude > 0 && !sfxIsPlaying)
+            {
+                sfxIsPlaying = true;
+                rollingBallSFX.PlaySFX();
+            }
+            else if (playerRB.linearVelocity.magnitude <= 0 && sfxIsPlaying)
+            {
+                sfxIsPlaying = false;
+                rollingBallSFX.StopSFX();
+            }
+            rollingBallSFX.ChangePitch(Mathf.Clamp(playerRB.linearVelocity.magnitude, 2.5f, 5f) / 5);
+        }
 
     } //End of FixedUpdate Method
 
@@ -60,6 +79,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("PickUp"))
         {
             other.gameObject.SetActive(false);
+            if (pickupSFX) pickupSFX.PlaySFX();
             count += 01;
             SetCountText();
         }
