@@ -45,6 +45,9 @@ namespace AudioSystem
         void Start()
         {
             sfxHandler.AudioMixer = this.audioMixer;
+        }
+        void OnEnable()
+        {
             if (playOnAwake)
             {
                 this.PlayMusicTrack(currMusicTrack, true);
@@ -170,6 +173,10 @@ namespace AudioSystem
         public void ChangeSFXPitchManually(float newPitch)
         {
             sfxHandler.ChangePitchManual(newPitch);
+        }
+        public void ChangeVolumeOfMixerGroup(string mixerGroupVolParam, float newVolume)
+        {
+            AudioMixerUtils.SetVolume(audioMixer, mixerGroupVolParam, newVolume);
         }
 
         private void PlayMusicTrack(AudioTrack AudioTrack)
